@@ -1,8 +1,10 @@
 ﻿using DataBase;
 using DataBase.Models;
+using ServicioEmpresa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 
 namespace EmpresaServidor
@@ -11,6 +13,7 @@ namespace EmpresaServidor
     {
         private UnitOfWork unitOfWork;
         List<Combustible> Combustibles;
+        static public ServerSocket Server;
         public Form1()
         {
             InitializeComponent();
@@ -30,27 +33,31 @@ namespace EmpresaServidor
             var text = textBoxIp.Text.Split(':');
             //TODO: Verificar formato de ip
             var ip = text[0];
-            var port = text[1];
-            //TODO: IniciarServidor....
+            var port = Convert.ToInt32(text[1]);
+            Server = new ServerSocket(IPAddress.Parse(ip), port);
+            Server.Start();
         }
 
         private void btnPrecio_Click(object sender, EventArgs e)
         {
-            /*
+           
             var combustible = Combustibles[comboBoxCombustible.SelectedIndex];
             combustible.NuevoPrecio = Convert.ToInt32(numericPrecio.Value);
             unitOfWork.Combustibles.Update(combustible);
             unitOfWork.SaveChanges();
-            */
-            var t = unitOfWork.Distribuidoras.GetAll().ToList();
-            MessageBox.Show("t");
+            
+            //cambia en la DB y de paso avisa con multicast (?)
 
-            //Solo actualiza NuevoPrecio, así se mantiene Precio por si alguien lo está utilizando.
+            //UP-Combustible-Precio
+            Server.Multicast($"UP-{comboBoxCombustible.Text}-{numericPrecio.Value}");
+
         }
 
         private void btnReporte_Click(object sender, EventArgs e)
         {
-            //TODO: Generar Reporte
+            Server.Multicast("RP-0");
+            //TODO: Generar Reporte 
+            //ni idea como generarlo
         }
     }
 }

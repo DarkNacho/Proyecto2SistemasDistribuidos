@@ -32,11 +32,11 @@ namespace Distribuidora
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnConectar = new System.Windows.Forms.Button();
-            this.textBoxIpCliente = new System.Windows.Forms.TextBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.textBoxIpServer = new System.Windows.Forms.TextBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.btnConectar = new System.Windows.Forms.Button();
+            this.textBoxIpCliente = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -72,22 +72,12 @@ namespace Distribuidora
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
-            // btnConectar
+            // numericUpDown2
             // 
-            this.btnConectar.Location = new System.Drawing.Point(16, 51);
-            this.btnConectar.Name = "btnConectar";
-            this.btnConectar.Size = new System.Drawing.Size(95, 23);
-            this.btnConectar.TabIndex = 1;
-            this.btnConectar.Text = "Conectar";
-            this.btnConectar.UseVisualStyleBackColor = true;
-            // 
-            // textBoxIpCliente
-            // 
-            this.textBoxIpCliente.Location = new System.Drawing.Point(7, 22);
-            this.textBoxIpCliente.Name = "textBoxIpCliente";
-            this.textBoxIpCliente.Size = new System.Drawing.Size(120, 23);
-            this.textBoxIpCliente.TabIndex = 0;
-            this.textBoxIpCliente.Text = "IP";
+            this.numericUpDown2.Location = new System.Drawing.Point(36, 110);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(53, 23);
+            this.numericUpDown2.TabIndex = 4;
             // 
             // btnIniciar
             // 
@@ -97,6 +87,7 @@ namespace Distribuidora
             this.btnIniciar.TabIndex = 3;
             this.btnIniciar.Text = "Iniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
             // textBoxIpServer
             // 
@@ -106,12 +97,23 @@ namespace Distribuidora
             this.textBoxIpServer.TabIndex = 2;
             this.textBoxIpServer.Text = "IP";
             // 
-            // numericUpDown2
+            // btnConectar
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(36, 110);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(53, 23);
-            this.numericUpDown2.TabIndex = 4;
+            this.btnConectar.Location = new System.Drawing.Point(16, 51);
+            this.btnConectar.Name = "btnConectar";
+            this.btnConectar.Size = new System.Drawing.Size(95, 23);
+            this.btnConectar.TabIndex = 1;
+            this.btnConectar.Text = "Conectar";
+            this.btnConectar.UseVisualStyleBackColor = true;
+            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
+            // 
+            // textBoxIpCliente
+            // 
+            this.textBoxIpCliente.Location = new System.Drawing.Point(7, 22);
+            this.textBoxIpCliente.Name = "textBoxIpCliente";
+            this.textBoxIpCliente.Size = new System.Drawing.Size(120, 23);
+            this.textBoxIpCliente.TabIndex = 0;
+            this.textBoxIpCliente.Text = "IP";
             // 
             // Form1
             // 
