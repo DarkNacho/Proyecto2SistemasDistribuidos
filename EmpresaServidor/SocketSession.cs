@@ -1,6 +1,7 @@
 ﻿using NetCoreServer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 
@@ -14,7 +15,7 @@ namespace ServicioEmpresa
         protected override void OnConnected()
         {
             Console.WriteLine($"TCP session with Id {Id} connected!");
-
+           
             // Send invite message
             //string message = "Hello from TCP chat! Please send a message or '!' to disconnect the client!";
             //SendAsync(message);
@@ -29,6 +30,7 @@ namespace ServicioEmpresa
         {
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             Console.WriteLine("Incoming: " + message);
+            File.WriteAllText("reporte.txt", message);
 
             // Multicast message to all connected sessions
             //Server.Multicast(message);

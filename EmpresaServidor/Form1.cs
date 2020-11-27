@@ -11,20 +11,16 @@ namespace EmpresaServidor
 {
     public partial class Form1 : Form
     {
-        private UnitOfWork unitOfWork;
         List<Combustible> Combustibles;
         static public ServerSocket Server;
         public Form1()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            Combustibles = unitOfWork.Combustibles.GetAll().ToList();
-            Combustibles.ForEach(x => comboBoxCombustible.Items.Add(x.Tipo));
         }
 
         private void comboBoxCombustible_SelectedIndexChanged(object sender, EventArgs e)
         {
-            numericPrecio.Value = Combustibles[comboBoxCombustible.SelectedIndex].Precio;
+            //numericPrecio.Value = Combustibles[comboBoxCombustible.SelectedIndex].Precio;
             //quizas debería dejar NuevoPrecio
         }
 
@@ -40,17 +36,7 @@ namespace EmpresaServidor
 
         private void btnPrecio_Click(object sender, EventArgs e)
         {
-           
-            var combustible = Combustibles[comboBoxCombustible.SelectedIndex];
-            combustible.NuevoPrecio = Convert.ToInt32(numericPrecio.Value);
-            unitOfWork.Combustibles.Update(combustible);
-            unitOfWork.SaveChanges();
-            
-            //cambia en la DB y de paso avisa con multicast (?)
-
-            //UP-Combustible-Precio
             Server.Multicast($"UP-{comboBoxCombustible.Text}-{numericPrecio.Value}");
-
         }
 
         private void btnReporte_Click(object sender, EventArgs e)

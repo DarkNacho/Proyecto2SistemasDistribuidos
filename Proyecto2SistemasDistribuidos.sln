@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpresaServidor", "EmpresaServidor\EmpresaServidor.csproj", "{8B2081BE-ED8F-49D0-A55A-CCFE5FC518C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmpresaServidor", "EmpresaServidor\EmpresaServidor.csproj", "{8B2081BE-ED8F-49D0-A55A-CCFE5FC518C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{11618B4E-0CD6-4CD7-868F-A1112AAC98BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{11618B4E-0CD6-4CD7-868F-A1112AAC98BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribuidora", "Distribuidora\Distribuidora.csproj", "{5FEEC9DB-3283-46BB-B604-135B6C5FE2E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Distribuidora", "Distribuidora\Distribuidora.csproj", "{5FEEC9DB-3283-46BB-B604-135B6C5FE2E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surtidor", "Surtidor\Surtidor.csproj", "{F1897212-744E-422E-BE5C-D3E0008BEFEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5FEEC9DB-3283-46BB-B604-135B6C5FE2E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FEEC9DB-3283-46BB-B604-135B6C5FE2E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FEEC9DB-3283-46BB-B604-135B6C5FE2E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1897212-744E-422E-BE5C-D3E0008BEFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1897212-744E-422E-BE5C-D3E0008BEFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1897212-744E-422E-BE5C-D3E0008BEFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1897212-744E-422E-BE5C-D3E0008BEFEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

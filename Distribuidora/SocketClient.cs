@@ -1,4 +1,5 @@
-﻿using NetCoreServer;
+﻿using DataBase;
+using NetCoreServer;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,8 +11,17 @@ namespace ServicioDistribuidora
     public class SocketClient : TcpClient
     {
         private bool _stop;
+        private int distribuidraId;
+        private ServerSocket Server;
 
-        public SocketClient(string address, int port) : base(address, port) { }
+        public SocketClient(string address, int port, int id, ServerSocket server) : base(address, port)
+        {
+            unitOfWork = new UnitOfWork();
+            distribuidraId = id;
+            Server = server;
+          
+        }
+        private UnitOfWork unitOfWork;
 
         protected override void OnConnected()
         {
@@ -24,7 +34,7 @@ namespace ServicioDistribuidora
             Console.WriteLine($"TCP client {Id} started listening to server");
             while (1 == 1)
             {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[2048];
                 long bytes = Receive(buffer);
             }
         }
@@ -50,12 +60,26 @@ namespace ServicioDistribuidora
             {
                 case "UP":
                     String fuel = message.Split('-')[1];
-                    String price = message.Split('-')[2];
+                    int price = Convert.ToInt32(message.Split('-')[2]);
+
+                    var combustible = unitOfWork.Combustibles[fuel];
+                    combustible.NuevoPrecio = price;
+                    combustible.Precio = price;
+                    unitOfWork.Combustibles.Update(combustible);
+                    unitOfWork.SaveChanges();
                     //Cambiar precio del combustible indicado en tabla combustibles (recordar usar factor de utilidad).
+
+                    //informar a los clientes
+                    Server.Multicast("UP-bla");
                     break;
                 case "RP":
+                    var surtidores = unitOfWork.Distribuidoras[distribuidraId].Surtidores;
+                    var info = "";
+                    foreach (var surtidor in surtidores)
+                        info += $"{surtidor.Id} Ha consumido: {surtidor.LitrosConsumidos} y se ha cargado {surtidor.CantidadCargas}\n";
+
                     //Enviar reporte; String con datos de cada distribuidora.
-                    String reporte = "RP-reporte";
+                    String reporte = $"RP-{info}";
                     Send(reporte);
                     break;
                 default:

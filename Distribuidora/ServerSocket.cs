@@ -1,4 +1,5 @@
-﻿using NetCoreServer;
+﻿using DataBase;
+using NetCoreServer;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -10,9 +11,11 @@ namespace ServicioDistribuidora
 {
     public class ServerSocket : TcpServer
     {
-        public ServerSocket(IPAddress address, int port) : base(address, port) { }
+        int id;
+        UnitOfWork unitOfWork;
+        public ServerSocket(IPAddress address, int port, int _id, UnitOfWork context) : base(address, port) { id = _id;  unitOfWork = context; }
 
-        protected override TcpSession CreateSession() { return new SocketSession(this); }
+        protected override TcpSession CreateSession() { return new SocketSession(this, id, unitOfWork); }
 
         protected override void OnError(SocketError error)
         {

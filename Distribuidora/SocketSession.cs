@@ -1,20 +1,33 @@
-﻿using NetCoreServer;
+﻿using DataBase;
+using NetCoreServer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 
 namespace ServicioDistribuidora
 {
     class SocketSession : TcpSession
     {
 
-        public SocketSession(TcpServer server) : base(server) { }
+        private int distribuidoraId;
+        private UnitOfWork unitOfWork; 
+        public SocketSession(TcpServer server, int id, UnitOfWork context) : base(server) 
+        {
+            unitOfWork = context;
+            distribuidoraId = id;
+        }
+
+        public SocketSession(TcpServer server) : base(server)
+        {
+        }
 
         protected override void OnConnected()
         {
             Console.WriteLine($"TCP session with Id {Id} connected!");
-
+            
             // Send invite message
             //string message = "Hello from TCP chat! Please send a message or '!' to disconnect the client!";
             //SendAsync(message);
@@ -34,9 +47,25 @@ namespace ServicioDistribuidora
             switch (request)
             {
                 case "SF":
-                    String fuel = message.Split('-')[1];
-                    String lt = message.Split('-')[2];
+                    int id = Convert.ToInt32(message.Split('-')[1]);
+                    int lt = Convert.ToInt32(message.Split('-')[2]);
+                    var surtidor = unitOfWork.Distribuidoras[distribuidoraId].Surtidores.Where(x => x.Id == id).SingleOrDefault();
+                    surtidor.LitrosConsumidos += lt;
+                    surtidor.CantidadCargas +=1;
                     //Actualizar litros consumidos y cargas al combustible en tabla combustibles
+                    break;
+                case "CONECTION":
+                    message = message.Substring(10);
+                    string idCLiente = message.Split("::")[0];
+                    int idSurtidor = Convert.ToInt32(message.Split("::")[1]);
+                    //var tes = unitOfWork.Distribuidoras.GetAll().ToList();
+                    var tes = unitOfWork.Distribuidoras.GetAllCombustibleSurtidor(idSurtidor).ToList();
+                    var t = JsonSerializer.Serialize(tes);
+                    ///var Client = Server.FindSession(new Guid(idCLiente));
+                    Server.Multicast($"CONECTION-::::{t}::::{idCLiente}");
+                    break;
+                case "UTILIDAD":
+                    Server.Multicast($"UTILIDAD-{unitOfWork.Distribuidoras[distribuidoraId].FactorUtilidad}");
                     break;
                 default:
                     Console.WriteLine("Mensaje no identificado");
