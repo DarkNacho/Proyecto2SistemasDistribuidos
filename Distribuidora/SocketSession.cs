@@ -49,7 +49,7 @@ namespace ServicioDistribuidora
                 case "SF":
                     int id = Convert.ToInt32(message.Split('-')[1]);
                     int lt = Convert.ToInt32(message.Split('-')[2]);
-                    var distribuidora = unitOfWork.Distribuidoras.Get(id);
+                    var distribuidora = unitOfWork.Distribuidoras.Get(distribuidoraId);
                     var surtidor = distribuidora.Surtidores.Where(x => x.Id == id).FirstOrDefault();
                     surtidor.LitrosConsumidos += lt;
                     surtidor.CantidadCargas +=1;
