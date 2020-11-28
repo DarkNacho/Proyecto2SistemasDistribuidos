@@ -14,9 +14,9 @@ namespace ServicioDistribuidora
 
         private int distribuidoraId;
         private UnitOfWork unitOfWork; 
-        public SocketSession(TcpServer server, int id, UnitOfWork context) : base(server) 
+        public SocketSession(TcpServer server, int id) : base(server) 
         {
-            unitOfWork = context;
+            unitOfWork = UnitOfWork.GetInstance();
             distribuidoraId = id;
         }
 
@@ -42,16 +42,19 @@ namespace ServicioDistribuidora
         {
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             Console.WriteLine("Incoming: " + message);
-
             String request = message.Split('-')[0];
+            unitOfWork = UnitOfWork.GetInstance();
             switch (request)
             {
                 case "SF":
                     int id = Convert.ToInt32(message.Split('-')[1]);
                     int lt = Convert.ToInt32(message.Split('-')[2]);
-                    var surtidor = unitOfWork.Distribuidoras[distribuidoraId].Surtidores.Where(x => x.Id == id).SingleOrDefault();
+                    var distribuidora = unitOfWork.Distribuidoras.Get(id);
+                    var surtidor = distribuidora.Surtidores.Where(x => x.Id == id).FirstOrDefault();
                     surtidor.LitrosConsumidos += lt;
                     surtidor.CantidadCargas +=1;
+                    unitOfWork.Surtidores.Update(surtidor);
+                    unitOfWork.SaveChanges();
                     //Actualizar litros consumidos y cargas al combustible en tabla combustibles
                     break;
                 case "CONECTION":

@@ -129,7 +129,7 @@ namespace EmpresaServidor
             this.textBoxIp.Name = "textBoxIp";
             this.textBoxIp.Size = new System.Drawing.Size(120, 23);
             this.textBoxIp.TabIndex = 0;
-            this.textBoxIp.Text = "IP";
+            this.textBoxIp.Text = "127.0.0.1:9001";
             // 
             // Form1
             // 

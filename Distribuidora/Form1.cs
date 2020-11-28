@@ -21,7 +21,7 @@ namespace Distribuidora
         public Form1()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            unitOfWork = UnitOfWork.GetInstance();
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace Distribuidora
             //TODO: Verificar formato de ip
             var ip = text[0];
             var port = Convert.ToInt32(text[1]);
-            Server = new ServerSocket(IPAddress.Parse(ip), port, Convert.ToInt32(numericUpDown2.Value), unitOfWork);
+            Server = new ServerSocket(IPAddress.Parse(ip), port, Convert.ToInt32(numericUpDown2.Value));
             Server.Start();
             numericUpDown1.Value = (int)(unitOfWork.Distribuidoras[Convert.ToInt32(numericUpDown2.Value)].FactorUtilidad * 100);
         }

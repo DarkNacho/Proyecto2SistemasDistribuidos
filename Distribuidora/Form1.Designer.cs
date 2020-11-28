@@ -96,7 +96,7 @@ namespace Distribuidora
             this.textBoxIpServer.Name = "textBoxIpServer";
             this.textBoxIpServer.Size = new System.Drawing.Size(120, 23);
             this.textBoxIpServer.TabIndex = 2;
-            this.textBoxIpServer.Text = "IP";
+            this.textBoxIpServer.Text = "127.0.0.1:9000";
             // 
             // btnConectar
             // 
@@ -114,7 +114,7 @@ namespace Distribuidora
             this.textBoxIpCliente.Name = "textBoxIpCliente";
             this.textBoxIpCliente.Size = new System.Drawing.Size(120, 23);
             this.textBoxIpCliente.TabIndex = 0;
-            this.textBoxIpCliente.Text = "IP";
+            this.textBoxIpCliente.Text = "127.0.0.1:9001";
             // 
             // Form1
             // 

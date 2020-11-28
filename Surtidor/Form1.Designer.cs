@@ -112,7 +112,7 @@ namespace Surtidor
             this.textBoxIp.Name = "textBoxIp";
             this.textBoxIp.Size = new System.Drawing.Size(120, 23);
             this.textBoxIp.TabIndex = 2;
-            this.textBoxIp.Text = "IP";
+            this.textBoxIp.Text = "127.0.0.1:9000";
             // 
             // Form1
             // 

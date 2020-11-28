@@ -11,7 +11,12 @@ namespace DataBase
         public readonly ApplicationDbContext _context;
         public Repository<Combustible, string> Combustibles{ get; set; }
         public RepositoryDistribuidora Distribuidoras{ get; set; }
-        public UnitOfWork()
+        public Repository<Surtidor, int> Surtidores { get; set; }
+           private static UnitOfWork _instance;
+
+        public static UnitOfWork GetInstance() => _instance == null ? new UnitOfWork() : _instance;
+      
+        private UnitOfWork()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>();
             options.UseSqlite("Data Source=test.db");
@@ -24,6 +29,7 @@ namespace DataBase
 
             Combustibles = new Repository<Combustible,string>(_context);
             Distribuidoras = new RepositoryDistribuidora(_context);
+            Surtidores = new Repository<Surtidor, int>(_context);
         }
         public int SaveChanges() => _context.SaveChanges();
         public Task<int> SaveChangesAsync() => _context.SaveChangesAsync();

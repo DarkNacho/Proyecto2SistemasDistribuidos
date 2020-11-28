@@ -16,7 +16,7 @@ namespace ServicioDistribuidora
 
         public SocketClient(string address, int port, int id, ServerSocket server) : base(address, port)
         {
-            unitOfWork = new UnitOfWork();
+            unitOfWork = UnitOfWork.GetInstance();
             distribuidraId = id;
             Server = server;
           
@@ -56,6 +56,7 @@ namespace ServicioDistribuidora
             Console.WriteLine(Encoding.UTF8.GetString(buffer, (int)offset, (int)size));
             String message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             String request = message.Split('-')[0];
+            unitOfWork = UnitOfWork.GetInstance();
             switch (request)
             {
                 case "UP":
@@ -68,19 +69,18 @@ namespace ServicioDistribuidora
                     unitOfWork.Combustibles.Update(combustible);
                     unitOfWork.SaveChanges();
                     //Cambiar precio del combustible indicado en tabla combustibles (recordar usar factor de utilidad).
-
                     //informar a los clientes
                     Server.Multicast("UP-bla");
                     break;
                 case "RP":
-                    var surtidores = unitOfWork.Distribuidoras[distribuidraId].Surtidores;
+                    
+                    var surtidores = unitOfWork.Distribuidoras.Get(distribuidraId).Surtidores;
                     var info = "";
                     foreach (var surtidor in surtidores)
                         info += $"{surtidor.Id} Ha consumido: {surtidor.LitrosConsumidos} y se ha cargado {surtidor.CantidadCargas}\n";
-
                     //Enviar reporte; String con datos de cada distribuidora.
-                    String reporte = $"RP-{info}";
-                    Send(reporte);
+                    //String reporte = $"RP-{info}";
+                    Send(info);
                     break;
                 default:
                     Console.WriteLine("Mensaje no identificado");

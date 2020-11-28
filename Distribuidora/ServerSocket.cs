@@ -12,10 +12,9 @@ namespace ServicioDistribuidora
     public class ServerSocket : TcpServer
     {
         int id;
-        UnitOfWork unitOfWork;
-        public ServerSocket(IPAddress address, int port, int _id, UnitOfWork context) : base(address, port) { id = _id;  unitOfWork = context; }
+        public ServerSocket(IPAddress address, int port, int _id) : base(address, port) { id = _id; }
 
-        protected override TcpSession CreateSession() { return new SocketSession(this, id, unitOfWork); }
+        protected override TcpSession CreateSession() { return new SocketSession(this, id); }
 
         protected override void OnError(SocketError error)
         {
