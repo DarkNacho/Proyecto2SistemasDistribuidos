@@ -47,8 +47,10 @@ namespace Distribuidora
 
         private void button1_Click(object sender, EventArgs e)
         {
-            unitOfWork.Distribuidoras[Convert.ToInt32(numericUpDown2.Value)].FactorUtilidad = Convert.ToInt32(numericUpDown1.Value) / 100.0f;
+            var utilidad = Convert.ToInt32(numericUpDown1.Value) / 100.0f;
+            unitOfWork.Distribuidoras[Convert.ToInt32(numericUpDown2.Value)].FactorUtilidad = utilidad;
             unitOfWork.SaveChanges();
+            Server.Multicast($"UTILIDAD-{utilidad}");
         }
     }
 }
