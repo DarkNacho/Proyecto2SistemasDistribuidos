@@ -45,5 +45,10 @@ namespace EmpresaServidor
             //TODO: Generar Reporte 
             //ni idea como generarlo
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
