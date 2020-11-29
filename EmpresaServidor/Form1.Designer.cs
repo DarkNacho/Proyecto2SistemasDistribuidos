@@ -52,12 +52,13 @@ namespace EmpresaServidor
             "93",
             "95",
             "97",
-            "Disel"});
+            "Diesel",
+            "Kerosene"});
             this.comboBoxCombustible.Location = new System.Drawing.Point(6, 22);
             this.comboBoxCombustible.Name = "comboBoxCombustible";
             this.comboBoxCombustible.Size = new System.Drawing.Size(198, 24);
             this.comboBoxCombustible.TabIndex = 0;
-            this.comboBoxCombustible.Text = "Combustible";
+            this.comboBoxCombustible.SelectedItem = "93";
             this.comboBoxCombustible.SelectedIndexChanged += new System.EventHandler(this.comboBoxCombustible_SelectedIndexChanged);
             // 
             // numericPrecio

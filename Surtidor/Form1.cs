@@ -44,8 +44,10 @@ namespace Surtidor
                 }
             }
             Cliente.Send($"UTILIDAD-bla");
-
-
+            btnConectar.Enabled = false;
+            comboBox1.SelectedItem = "93";
+            textBoxIp.Enabled = false;
+            numericUpDown2.Enabled = false;
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

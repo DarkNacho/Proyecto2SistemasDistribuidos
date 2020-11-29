@@ -32,6 +32,8 @@ namespace EmpresaServidor
             var port = Convert.ToInt32(text[1]);
             Server = new ServerSocket(IPAddress.Parse(ip), port);
             Server.Start();
+            btnConectar.Enabled = false;
+            textBoxIp.Enabled = false;
         }
 
         private void btnPrecio_Click(object sender, EventArgs e)

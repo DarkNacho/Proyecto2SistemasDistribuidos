@@ -32,6 +32,8 @@ namespace Distribuidora
             var port = Convert.ToInt32(text[1]);
             Client = new SocketClient(ip, port, Convert.ToInt32(numericUpDown2.Value), Server);
             Client.Connect();
+            btnConectar.Enabled = false;
+            textBoxIpCliente.Enabled = false;
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
@@ -43,6 +45,9 @@ namespace Distribuidora
             Server = new ServerSocket(IPAddress.Parse(ip), port, Convert.ToInt32(numericUpDown2.Value));
             Server.Start();
             numericUpDown1.Value = (int)(unitOfWork.Distribuidoras[Convert.ToInt32(numericUpDown2.Value)].FactorUtilidad * 100);
+            btnIniciar.Enabled = false;
+            textBoxIpServer.Enabled = false;
+            numericUpDown2.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
