@@ -36,10 +36,10 @@ namespace EmpresaServidor
             this.btnReporte = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnConectar = new System.Windows.Forms.Button();
             this.textBoxIp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrecio)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -58,7 +58,6 @@ namespace EmpresaServidor
             this.comboBoxCombustible.Name = "comboBoxCombustible";
             this.comboBoxCombustible.Size = new System.Drawing.Size(198, 24);
             this.comboBoxCombustible.TabIndex = 0;
-            this.comboBoxCombustible.SelectedItem = "93";
             this.comboBoxCombustible.SelectedIndexChanged += new System.EventHandler(this.comboBoxCombustible_SelectedIndexChanged);
             // 
             // numericPrecio
@@ -120,6 +119,17 @@ namespace EmpresaServidor
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de conexión";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(8, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 16);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "IP::Puerto";
+            // 
             // btnConectar
             // 
             this.btnConectar.Location = new System.Drawing.Point(6, 55);
@@ -155,17 +165,6 @@ namespace EmpresaServidor
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.UseCompatibleTextRendering = true;
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(8, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 16);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "IP::Puerto";
             // 
             // Form1
             // 
