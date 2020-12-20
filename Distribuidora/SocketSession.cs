@@ -55,7 +55,7 @@ namespace ServicioDistribuidora
                     surtidor.CantidadCargas +=1;
                     unitOfWork.Surtidores.Update(surtidor);
                     unitOfWork.SaveChanges();
-                    //Actualizar litros consumidos y cargas al combustible en tabla combustibles
+                    Server.Multicast("SF-OK");
                     break;
                 case "CONECTION":
                     message = message.Substring(10);

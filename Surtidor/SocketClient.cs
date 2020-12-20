@@ -14,8 +14,10 @@ namespace ServicioSurtidor
     {
         private bool _stop;
         public List<DataBase.Models.Combustible> Combustibles;
+        public int litrosVendidos = 0;
         public float utilidad = 0;
         private int distribuidoraId;
+        public bool serverUp;
 
         public SocketClient(string address, int port, int id) : base(address, port) { distribuidoraId = id; }
 
@@ -52,6 +54,7 @@ namespace ServicioSurtidor
             Console.WriteLine(Encoding.UTF8.GetString(buffer, (int)offset, (int)size));
             String message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             String request = message.Split('-')[0];
+            serverUp = false;
             switch (request)
             {
                 //Server.Multicast($"CONECTION-::::{t}::::{idCLiente}");
@@ -66,9 +69,19 @@ namespace ServicioSurtidor
                 case "UP":
                     Send($"CONECTION-{Id}::{distribuidoraId}");
                     break;
+                case "SF":
+                    serverUp = true;
+                    break;
             }
-
-
+            //Tratar de reconectar
+            Thread t = new Thread(() => {
+                while (!serverUp)
+                {
+                    serverUp = Connect();
+                }
+            });
+            t.Start();
+            //t.Join();
         }
 
         protected override void OnError(System.Net.Sockets.SocketError error)

@@ -15,6 +15,8 @@ namespace Surtidor
     public partial class Form1 : Form
     {
         private static SocketClient Cliente;
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -57,9 +59,14 @@ namespace Surtidor
         private void button1_Click(object sender, EventArgs e)
         {
             Cliente.Send($"SF-{numericUpDown2.Value}-{numericUpDown1.Value}");
-            //Thread.Sleep(100);
+            Thread.Sleep(5000);
+            if (!Cliente.serverUp)
+                Cliente.litrosVendidos += Convert.ToInt32(numericUpDown1.Value);
+            else if (Cliente.serverUp && Cliente.litrosVendidos > 0) {
+                Cliente.Send($"SF-{numericUpDown2.Value}-{Cliente.litrosVendidos}");
+                Cliente.litrosVendidos = 0;
+            }
             Cliente.Combustibles[comboBox1.SelectedIndex].Precio = Cliente.Combustibles[comboBox1.SelectedIndex].NuevoPrecio;
-
         }
 
         private void label3_Click(object sender, EventArgs e)
