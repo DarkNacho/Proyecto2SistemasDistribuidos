@@ -17,12 +17,13 @@ namespace DataBase
         private static string _DataBaseSource = "Data Source=test.db";
         public static string DataBaseSource { get => _DataBaseSource; set => _DataBaseSource = "Data Source=" + value; }
         public static UnitOfWork GetInstance() => _instance == null ? new UnitOfWork(DataBaseSource) : _instance;
-      
+        public static UnitOfWork ResetGetInstance() => new UnitOfWork(DataBaseSource);
         private UnitOfWork(string path)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>();
             options.UseSqlite(path);
-            ApplicationDbContext dbContext = new ApplicationDbContext(options.Options);
+            //options.UseNpgsql
+           ApplicationDbContext dbContext = new ApplicationDbContext(options.Options);
             //dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
             //Seeder.Populate(dbContext);

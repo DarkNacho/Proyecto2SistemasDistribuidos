@@ -18,6 +18,7 @@ namespace Surtidor
     {
         private static SocketClient Cliente;
         ConfigurationModel Conf;
+        int litrosVendidos = 0;
 
         public Form1()
         {
@@ -91,15 +92,13 @@ namespace Surtidor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cliente.Send($"SF-{numericUpDown2.Value}-{numericUpDown1.Value}");
-            Thread.Sleep(5000);
-            if (!Cliente.serverUp)
-                Cliente.litrosVendidos += Convert.ToInt32(numericUpDown1.Value);
-            else if (Cliente.serverUp && Cliente.litrosVendidos > 0) {
-                Cliente.Send($"SF-{numericUpDown2.Value}-{Cliente.litrosVendidos}");
-                Cliente.litrosVendidos = 0;
+            if (Cliente.IsConnected)
+            {
+                Thread.Sleep(10000); //simula que está cargando 
+                litrosVendidos += Convert.ToInt32(numericUpDown1.Value);
+                //MessageBox.Show("espera de 10 seg... venta : " + numericUpDown1.Value.ToString());
+                // Cliente.Combustibles[comboBox1.SelectedIndex].Precio = Cliente.Combustibles[comboBox1.SelectedIndex].NuevoPrecio;
             }
-            Cliente.Combustibles[comboBox1.SelectedIndex].Precio = Cliente.Combustibles[comboBox1.SelectedIndex].NuevoPrecio;
         }
 
         private void WatchDog()
@@ -117,7 +116,15 @@ namespace Surtidor
                         if (!conected) MessageBox.Show("Ambos fallaron... ahora debería hacer algo");
                         else MessageBox.Show("Conectado en respaldo");
                     }
+                    /// se asume que la reconección fue exitosa... para enviar los datos
                 }
+                if (Cliente.IsConnected && litrosVendidos > 0)
+                {
+                    Cliente.Send($"SF-{numericUpDown2.Value}-{litrosVendidos}");
+                    litrosVendidos = 0;
+                    MessageBox.Show("se envio venta ");
+                }
+                Thread.Sleep(1000);
             }
         }
 

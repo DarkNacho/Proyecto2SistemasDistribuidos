@@ -21,6 +21,7 @@ namespace Distribuidora
         static public SocketClient Client;
         public UnitOfWork unitOfWork;
         private ConfigurationModel Conf;
+
         public Form1()
         {
             InitializeComponent();
@@ -98,14 +99,16 @@ namespace Distribuidora
                 {
                     MessageBox.Show("Se ha desconectado sin querer, reconectando...");
                     var conected = ClientConection(Conf.ClientServer);
-                    if(!conected)
+                    if (!conected)
                     {
                         MessageBox.Show("No se pudo renectar, intentando en servidor de respaldo");
                         conected = ClientConection(Conf.BackUpClientServer);
                         if (!conected) MessageBox.Show("Ambos fallaron... ahora debería hacer algo");
                         else MessageBox.Show("Conectado en respaldo");
                     }
+                    else MessageBox.Show("ReConectaado");
                 }
+               
             }
         }
 

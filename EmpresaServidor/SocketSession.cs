@@ -30,7 +30,9 @@ namespace ServicioEmpresa
         {
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             Console.WriteLine("Incoming: " + message);
-            File.WriteAllText("reporte.txt", message);
+            File.AppendAllText("reporte.txt", message);
+            
+            //File.WriteAllText("reporte.txt", message);
 
             // Multicast message to all connected sessions
             //Server.Multicast(message);

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataBase.Models;
 using System.Text.Json;
 using System.Linq;
+using System.IO;
 
 namespace ServicioSurtidor
 {
@@ -40,7 +41,7 @@ namespace ServicioSurtidor
         protected override void OnDisconnected()
         {
             Console.WriteLine($"TCP client disconnected a session with Id {Id}");
-
+         
             // Wait for a while...
             //Thread.Sleep(1000);
 
@@ -73,15 +74,6 @@ namespace ServicioSurtidor
                     serverUp = true;
                     break;
             }
-            //Tratar de reconectar
-            Thread t = new Thread(() => {
-                while (!serverUp)
-                {
-                    serverUp = Connect();
-                }
-            });
-            t.Start();
-            //t.Join();
         }
 
         protected override void OnError(System.Net.Sockets.SocketError error)

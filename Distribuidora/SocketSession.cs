@@ -2,6 +2,7 @@
 using NetCoreServer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -35,7 +36,7 @@ namespace ServicioDistribuidora
 
         protected override void OnDisconnected()
         {
-            Console.WriteLine($"TCP session with Id {Id} disconnected!");
+         
         }
 
         protected override void OnReceived(byte[] buffer, long offset, long size)

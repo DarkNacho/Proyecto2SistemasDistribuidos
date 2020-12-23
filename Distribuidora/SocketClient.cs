@@ -13,7 +13,7 @@ namespace ServicioDistribuidora
         public bool _stop;
         private int distribuidraId;
         private ServerSocket Server;
-
+    
         public SocketClient(string address, int port, int id, ServerSocket server) : base(address, port)
         {
             unitOfWork = UnitOfWork.GetInstance();
@@ -74,9 +74,9 @@ namespace ServicioDistribuidora
                 case "RP":
                     
                     var surtidores = unitOfWork.Distribuidoras.Get(distribuidraId).Surtidores;
-                    var info = "";
+                    var info = $"Cliente: {Id}\n";
                     foreach (var surtidor in surtidores)
-                        info += $"{surtidor.Id} Ha consumido: {surtidor.LitrosConsumidos} y se ha cargado {surtidor.CantidadCargas}\n";
+                        info += $"Suritdo: {surtidor.Id} Ha consumido: {surtidor.LitrosConsumidos} y se ha cargado {surtidor.CantidadCargas}\n";
                     //Enviar reporte; String con datos de cada distribuidora.
                     //String reporte = $"RP-{info}";
                     Send(info);
