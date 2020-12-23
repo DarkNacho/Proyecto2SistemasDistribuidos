@@ -12,14 +12,16 @@ namespace DataBase
         public Repository<Combustible, string> Combustibles{ get; set; }
         public RepositoryDistribuidora Distribuidoras{ get; set; }
         public Repository<Surtidor, int> Surtidores { get; set; }
-           private static UnitOfWork _instance;
-
-        public static UnitOfWork GetInstance() => _instance == null ? new UnitOfWork() : _instance;
+        
+        private static UnitOfWork _instance;
+        private static string _DataBaseSource = "Data Source=test.db";
+        public static string DataBaseSource { get => _DataBaseSource; set => _DataBaseSource = "Data Source=" + value; }
+        public static UnitOfWork GetInstance() => _instance == null ? new UnitOfWork(DataBaseSource) : _instance;
       
-        private UnitOfWork()
+        private UnitOfWork(string path)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            options.UseSqlite("Data Source=test.db");
+            options.UseSqlite(path);
             ApplicationDbContext dbContext = new ApplicationDbContext(options.Options);
             //dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();

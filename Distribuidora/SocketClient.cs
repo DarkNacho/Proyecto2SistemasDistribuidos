@@ -10,7 +10,7 @@ namespace ServicioDistribuidora
 {
     public class SocketClient : TcpClient
     {
-        private bool _stop;
+        public bool _stop;
         private int distribuidraId;
         private ServerSocket Server;
 
@@ -47,8 +47,7 @@ namespace ServicioDistribuidora
             //Thread.Sleep(1000);
 
             // Try to connect again
-            //if (!_stop)
-            //    ConnectAsync();
+            //if (!_stop) ConnectAsync();
         }
 
         protected override void OnReceived(byte[] buffer, long offset, long size)
