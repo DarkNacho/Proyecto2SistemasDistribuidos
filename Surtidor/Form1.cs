@@ -98,6 +98,7 @@ namespace Surtidor
             {
                 Thread.Sleep(10000); //simula que está cargando 
                 litrosVendidos += Convert.ToInt32(numericUpDown1.Value);
+                
                 //MessageBox.Show("espera de 10 seg... venta : " + numericUpDown1.Value.ToString());
                 // Cliente.Combustibles[comboBox1.SelectedIndex].Precio = Cliente.Combustibles[comboBox1.SelectedIndex].NuevoPrecio;
             }
@@ -109,6 +110,7 @@ namespace Surtidor
             {
                 if (!Cliente.IsConnected)
                 {
+                    File.AppendAllText("reporteFallos.txt", $"Se ha perdido la conección con la distribuidora a las: {DateTime.Now}");
                     MessageBox.Show("Se ha desconectado sin querer, reconectando...");
                     var conected = ClientConection(Conf.ClientServer);
                     if (!conected)
@@ -118,6 +120,7 @@ namespace Surtidor
                         if (!conected) MessageBox.Show("Ambos fallaron... ahora debería hacer algo");
                         else MessageBox.Show("Conectado en respaldo");
                     }
+                    
                     /// se asume que la reconección fue exitosa... para enviar los datos
                 }
                 if (Cliente.IsConnected && litrosVendidos > 0)
