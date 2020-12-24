@@ -26,9 +26,10 @@ namespace Distribuidora
         {
             InitializeComponent();
             
-            Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("configuration.json"));
+            Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("DistribuidoraConf.json"));
             textBoxIpCliente.Text = Conf.ClientServer.ToString();
             textBoxIpServer.Text = Conf.ServerInfo.ToString();
+            numericUpDown2.Value = Conf.DistribuidoraID;
             UnitOfWork.DataBaseSource = Conf.DataBaseSource; //defaul normal
             if (!File.Exists(Conf.DataBaseSource))
             {
@@ -41,6 +42,13 @@ namespace Distribuidora
                 }
             }
             unitOfWork = UnitOfWork.GetInstance();
+
+            if (Conf.Autoconnection)
+            {
+                btnConectar_Click(this, null);
+                btnIniciar_Click(this, null);
+            }
+            
         }
 
         private void btnConectar_Click(object sender, EventArgs e)

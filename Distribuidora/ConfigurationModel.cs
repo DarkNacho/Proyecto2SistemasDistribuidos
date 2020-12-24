@@ -19,5 +19,7 @@ namespace Distribuidora
         public ServerInfoModel ServerInfo { get; set; }
         public string DataBaseSource { get; set; }
         public string BackUpDataBaseSource { get; set; }
+        public bool Autoconnection { get; set; }
+        public int DistribuidoraID { get; set; }
     }
 }
