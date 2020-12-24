@@ -23,9 +23,11 @@ namespace Surtidor
         public Form1()
         {
             InitializeComponent();
-            Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("configuration.json"));
+            Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("SurtidorConf.json"));
             textBoxIp.Text = Conf.ClientServer.ToString();
-
+            numericUpDown2.Value = Conf.SurtidorID;
+            if (Conf.Autoconnection) btnConectar_Click(this, null);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)

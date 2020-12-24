@@ -48,12 +48,6 @@ namespace EmpresaServidor
             // comboBoxCombustible
             // 
             this.comboBoxCombustible.FormattingEnabled = true;
-            this.comboBoxCombustible.Items.AddRange(new object[] {
-            "93",
-            "95",
-            "97",
-            "Diesel",
-            "Kerosene"});
             this.comboBoxCombustible.Location = new System.Drawing.Point(6, 22);
             this.comboBoxCombustible.Name = "comboBoxCombustible";
             this.comboBoxCombustible.Size = new System.Drawing.Size(198, 24);

@@ -3,8 +3,10 @@ using DataBase.Models;
 using ServicioEmpresa;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace EmpresaServidor
@@ -13,9 +15,15 @@ namespace EmpresaServidor
     {
         List<Combustible> Combustibles;
         static public ServerSocket Server;
+        ConfigurationModel Conf;
         public Form1()
         {
             InitializeComponent();
+
+            Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("EmpresaConf.json"));
+            comboBoxCombustible.Items.AddRange(Conf.Combustibles);
+            if (Conf.Autoconnection) btnConectar_Click(this, null);
+
         }
 
         private void comboBoxCombustible_SelectedIndexChanged(object sender, EventArgs e)

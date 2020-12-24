@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Surtidor
+namespace EmpresaServidor
 {
     class ServerInfoModel
     {
@@ -14,9 +14,8 @@ namespace Surtidor
     class ConfigurationModel
     {
 
-        public ServerInfoModel ClientServer { get; set; }
-        public ServerInfoModel BackUpClientServer { get; set; }
+        public ServerInfoModel ServerInfo { get; set; }
         public bool Autoconnection { get; set; }
-        public int SurtidorID { get; set; }
+        public string[] Combustibles { get; set; }
     }
 }
