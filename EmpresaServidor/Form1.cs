@@ -22,6 +22,7 @@ namespace EmpresaServidor
 
             Conf = JsonSerializer.Deserialize<ConfigurationModel>(File.ReadAllText("EmpresaConf.json"));
             comboBoxCombustible.Items.AddRange(Conf.Combustibles);
+            textBoxIp.Text = Conf.ServerInfo.ToString();
             if (Conf.Autoconnection) btnConectar_Click(this, null);
 
         }
